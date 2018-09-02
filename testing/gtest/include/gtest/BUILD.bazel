@@ -1,0 +1,87 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+cc_library(
+    name = "gtest-death-test",
+    hdrs = [
+        "gtest-death-test.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gtest-message",
+    hdrs = [
+        "gtest-message.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gtest-param-test",
+    hdrs = [
+        "gtest-param-test.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gtest-spi",
+    hdrs = [
+        "gtest-spi.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gtest",
+    hdrs = [
+        "gtest.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gtest_prod",
+    hdrs = [
+        "gtest_prod.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)

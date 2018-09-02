@@ -7,4 +7,8 @@
 // and testing/gmock, instead of directly including files in
 // third_party/googletest.
 
-#include "third_party/googletest/src/googlemock/include/gmock/gmock-actions.h"
+#ifdef V8_BAZEL
+#  include "gmock/gmock-actions.h"
+#else
+#  include "third_party/googletest/src/googlemock/include/gmock/gmock-actions.h"
+#endif

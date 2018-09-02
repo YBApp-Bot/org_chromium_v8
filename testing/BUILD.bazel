@@ -1,0 +1,31 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+cc_library(
+    name = "gmock-support",
+    hdrs = [
+        "gmock-support.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//testing/gmock/include/gmock",
+    ],
+)
+
+cc_library(
+    name = "gtest-support",
+    hdrs = [
+        "gtest-support.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//testing/gtest/include/gtest",
+    ],
+)

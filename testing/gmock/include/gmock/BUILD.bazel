@@ -1,0 +1,59 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+cc_library(
+    name = "gmock-actions",
+    hdrs = [
+        "gmock-actions.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gmock-generated-function-mockers",
+    hdrs = [
+        "gmock-generated-function-mockers.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gmock-matchers",
+    hdrs = [
+        "gmock-matchers.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)
+
+cc_library(
+    name = "gmock",
+    hdrs = [
+        "gmock.h",
+    ],
+    defines = [
+        "V8_BAZEL",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_googletest//:gtest",
+    ],
+)

@@ -1,0 +1,185 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+cc_library(
+    name = "torque_base",
+    srcs = [
+        "src/torque/ast.h",
+        "src/torque/contextual.h",
+        "src/torque/declarable.cc",
+        "src/torque/declarable.h",
+        "src/torque/declaration-visitor.cc",
+        "src/torque/declaration-visitor.h",
+        "src/torque/declarations.cc",
+        "src/torque/declarations.h",
+        "src/torque/earley-parser.cc",
+        "src/torque/earley-parser.h",
+        "src/torque/file-visitor.cc",
+        "src/torque/file-visitor.h",
+        "src/torque/global-context.h",
+        "src/torque/implementation-visitor.cc",
+        "src/torque/implementation-visitor.h",
+        "src/torque/parameter-difference.h",
+        "src/torque/scope.cc",
+        "src/torque/scope.h",
+        "src/torque/source-positions.cc",
+        "src/torque/source-positions.h",
+        "src/torque/torque-parser.cc",
+        "src/torque/torque-parser.h",
+        "src/torque/type-oracle.cc",
+        "src/torque/type-oracle.h",
+        "src/torque/types.cc",
+        "src/torque/types.h",
+        "src/torque/utils.cc",
+        "src/torque/utils.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":v8_libbase",
+    ],
+)
+
+cc_library(
+    name = "v8_libbase",
+    srcs = [
+        "include/v8-platform.h",
+        "include/v8config.h",
+
+        # SRCS
+        "src/base/adapters.h",
+        "src/base/atomicops.h",
+        "src/base/atomicops_internals_atomicword_compat.h",
+        "src/base/atomicops_internals_portable.h",
+        "src/base/atomicops_internals_std.h",
+        "src/base/base-export.h",
+        "src/base/bits.cc",
+        "src/base/bits.h",
+        "src/base/build_config.h",
+        "src/base/compiler-specific.h",
+        "src/base/cpu.cc",
+        "src/base/cpu.h",
+        "src/base/debug/stack_trace.cc",
+        "src/base/debug/stack_trace.h",
+        "src/base/division-by-constant.cc",
+        "src/base/division-by-constant.h",
+        "src/base/export-template.h",
+        "src/base/file-utils.cc",
+        "src/base/file-utils.h",
+        "src/base/flags.h",
+        "src/base/atomic-utils.h",
+        "src/base/macros.h",
+        "src/base/format-macros.h",
+        "src/base/free_deleter.h",
+        "src/base/functional.cc",
+        "src/base/functional.h",
+        "src/base/hashmap.h",
+        "src/base/hashmap-entry.h",
+        "src/base/ieee754.cc",
+        "src/base/ieee754.h",
+        "src/base/iterator.h",
+        "src/base/lazy-instance.h",
+        "src/base/list.h",
+        "src/base/logging.cc",
+        "src/base/logging.h",
+        "src/base/once.cc",
+        "src/base/once.h",
+        "src/base/optional.h",
+        "src/base/page-allocator.cc",
+        "src/base/page-allocator.h",
+        "src/base/platform/condition-variable.cc",
+        "src/base/platform/condition-variable.h",
+        "src/base/platform/elapsed-timer.h",
+        "src/base/platform/mutex.cc",
+        "src/base/platform/mutex.h",
+        "src/base/platform/platform.h",
+        "src/base/platform/semaphore.cc",
+        "src/base/platform/semaphore.h",
+        "src/base/platform/time.cc",
+        "src/base/platform/time.h",
+        "src/base/region-allocator.cc",
+        "src/base/region-allocator.h",
+        "src/base/ring-buffer.h",
+        "src/base/safe_conversions.h",
+        "src/base/safe_conversions_impl.h",
+        "src/base/safe_math.h",
+        "src/base/safe_math_impl.h",
+        "src/base/sys-info.cc",
+        "src/base/sys-info.h",
+        "src/base/template-utils.h",
+        "src/base/timezone-cache.h",
+        "src/base/tsan.h",
+        "src/base/utils/random-number-generator.cc",
+        "src/base/utils/random-number-generator.h",
+
+        # THESE OPTIONAL FILES ARE CHERRY-PICKED FOR MAC!
+
+        # TODO(yannic): Use select for these files
+        # and include them only on the correct platforms.
+
+        # if (is_posix || is_fuchsia)
+        "src/base/platform/platform-posix.cc",
+        "src/base/platform/platform-posix.h",
+
+        # if ((is_posix || is_fuchsia) && current_os != "aix")
+        "src/base/platform/platform-posix-time.cc",
+        "src/base/platform/platform-posix-time.h",
+
+        # if (is_mac)
+        "src/base/debug/stack_trace_posix.cc",
+        "src/base/platform/platform-macos.cc",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//testing/gtest/include/gtest:gtest_prod",
+    ],
+)
+
+cc_library(
+    name = "v8_libplatform",
+    srcs = [
+        "include/libplatform/libplatform.h",
+        "include/libplatform/libplatform-export.h",
+        "include/libplatform/v8-tracing.h",
+        "include/v8-platform.h",
+        "src/libplatform/default-foreground-task-runner.cc",
+        "src/libplatform/default-foreground-task-runner.h",
+        "src/libplatform/default-platform.cc",
+        "src/libplatform/default-platform.h",
+        "src/libplatform/default-worker-threads-task-runner.cc",
+        "src/libplatform/default-worker-threads-task-runner.h",
+        "src/libplatform/task-queue.cc",
+        "src/libplatform/task-queue.h",
+        "src/libplatform/tracing/trace-buffer.cc",
+        "src/libplatform/tracing/trace-buffer.h",
+        "src/libplatform/tracing/trace-config.cc",
+        "src/libplatform/tracing/trace-object.cc",
+        "src/libplatform/tracing/trace-writer.cc",
+        "src/libplatform/tracing/trace-writer.h",
+        "src/libplatform/tracing/tracing-controller.cc",
+        "src/libplatform/worker-thread.cc",
+        "src/libplatform/worker-thread.h",
+    ],
+    copts = ["-Iinclude"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":v8_libbase",
+        "@org_chromium_base_trace_event_common//:trace_event_common",
+    ],
+)
+
+cc_library(
+    name = "v8_libsampler",
+    srcs = [
+        "include/v8.h",
+        "include/v8-version.h",
+
+        # SRCS
+        "src/libsampler/sampler.cc",
+        "src/libsampler/sampler.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":v8_libbase",
+    ],
+)
