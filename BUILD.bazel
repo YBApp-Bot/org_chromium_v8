@@ -2,6 +2,57 @@
 ## Use of this source code is governed by a BSD-style license that can be
 ## found in the LICENSE file.
 
+load("//:torque.bzl", "torque", "torque_core", "torque_initializers")
+
+################################################################################
+##                                                                            ##
+##                                  Actions                                   ##
+##                                                                            ##
+################################################################################
+
+torque(
+    name = "run_torque",
+    srcs = [
+        "src/builtins/base.tq",
+        # This comment ensures |base.tq| is the first when buildifier is used.
+        # DO NOT REMOVE.
+        "src/builtins/array.tq",
+        "src/builtins/array-copywithin.tq",
+        "src/builtins/array-foreach.tq",
+        "src/builtins/array-lastindexof.tq",
+        "src/builtins/array-reverse.tq",
+        "src/builtins/data-view.tq",
+        "src/builtins/typed-array.tq",
+        "test/torque/test-torque.tq",
+        "third_party/v8/builtins/array-sort.tq",
+    ],
+    modules = [
+        "base",
+        "array",
+        "typed-array",
+        "data-view",
+        "test",
+    ],
+)
+
+torque_core(
+    name = "torque_generated_core",
+    torque = ":run_torque",
+)
+
+torque_initializers(
+    name = "torque_generated_initializers",
+    torque = ":run_torque",
+)
+
+################################################################################
+##                                                                            ##
+##                     Source Sets (aka static libraries)                     ##
+##                                                                            ##
+################################################################################
+
+# v8_source_set("v8_base")
+
 cc_library(
     name = "torque_base",
     srcs = [
@@ -181,5 +232,23 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         ":v8_libbase",
+    ],
+)
+
+# v8_source_set("fuzzer_support")
+
+################################################################################
+##                                                                            ##
+##                                Executables                                 ##
+##                                                                            ##
+################################################################################
+
+cc_binary(
+    name = "torque",
+    srcs = [
+        "src/torque/torque.cc",
+    ],
+    deps = [
+        ":torque_base",
     ],
 )
