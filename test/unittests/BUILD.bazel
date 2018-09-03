@@ -182,6 +182,7 @@ cc_test(
     copts = [
         "-Iexternal/gtest/include",
         "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
     ],
     deps = [
         "//:v8_libbase",

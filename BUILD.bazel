@@ -211,7 +211,10 @@ cc_library(
         "src/libplatform/worker-thread.cc",
         "src/libplatform/worker-thread.h",
     ],
-    copts = ["-Iinclude"],
+    copts = [
+        "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
+    ],
     visibility = ["//visibility:public"],
     deps = [
         ":v8_libbase",
