@@ -2,6 +2,8 @@
 ## Use of this source code is governed by a BSD-style license that can be
 ## found in the LICENSE file.
 
+licenses(["notice"])  # BSD 3-Clause
+
 load("//:torque.bzl", "torque", "torque_core", "torque_initializers")
 
 ################################################################################
@@ -183,6 +185,41 @@ cc_library(
     visibility = ["//visibility:public"],
     deps = [
         "//testing/gtest/include/gtest:gtest_prod",
+    ],
+)
+
+cc_library(
+    name = "src_inspector_private_headers",
+    srcs = [
+        "include/v8.h",
+        "include/v8-inspector.h",
+        "include/v8-profiler.h",
+        "include/v8-util.h",
+        "include/v8-version.h",
+        "src/allocation.h",
+        "src/base/v8-fallthrough.h",
+        "src/char-predicates.h",
+        "src/checks.h",
+        "src/conversions.h",
+        "src/debug/debug-interface.h",
+        "src/debug/interface-types.h",
+        "src/flag-definitions.h",
+        "src/flags.h",
+        "src/globals.h",
+        "src/tracing/trace-event.h",
+        "src/unicode.h",
+        "src/unicode-cache.h",
+        "src/unicode-decoder.h",
+        "src/utils.h",
+        "src/v8.h",
+        "src/v8memory.h",
+        "src/vector.h",
+        "src/wasm/wasm-feature-flags.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/third_party/utf8-decoder",
+        "@org_chromium_base_trace_event_common//:trace_event_common",
     ],
 )
 

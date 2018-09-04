@@ -1,0 +1,100 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+licenses(["notice"])  # BSD 3-Clause
+
+load("//src/inspector/build:xxd.bzl", "xxd")
+load("//third_party/inspector_protocol:check_protocol_compatibility.bzl", "check_protocol_compatibility")
+load("//third_party/inspector_protocol:code_generator.bzl", "code_generator")
+
+check_protocol_compatibility(
+    name = "protocol_compatibility",
+    protocol = "js_protocol.json",
+)
+
+code_generator(
+    name = "protocol_generated_sources",
+    compatibility = ":protocol_compatibility",
+    config = "inspector_protocol_config.json",
+    protocol = "js_protocol.json",
+)
+
+xxd(
+    name = "inspector_injected_script",
+    src = "injected-script-source.js",
+    output = "injected-script-source.h",
+    var = "InjectedScriptSource_js",
+)
+
+cc_library(
+    name = "inspector",
+    srcs = [
+        "injected-script.cc",
+        "injected-script.h",
+        "inspected-context.cc",
+        "inspected-context.h",
+        "remote-object-id.cc",
+        "remote-object-id.h",
+        "search-util.cc",
+        "search-util.h",
+        "string-16.cc",
+        "string-16.h",
+        "string-util.cc",
+        "string-util.h",
+        "test-interface.cc",
+        "test-interface.h",
+        "v8-console.cc",
+        "v8-console.h",
+        "v8-console-agent-impl.cc",
+        "v8-console-agent-impl.h",
+        "v8-console-message.cc",
+        "v8-console-message.h",
+        "v8-debugger.cc",
+        "v8-debugger.h",
+        "v8-debugger-agent-impl.cc",
+        "v8-debugger-agent-impl.h",
+        "v8-debugger-script.cc",
+        "v8-debugger-script.h",
+        "v8-function-call.cc",
+        "v8-function-call.h",
+        "v8-heap-profiler-agent-impl.cc",
+        "v8-heap-profiler-agent-impl.h",
+        "v8-injected-script-host.cc",
+        "v8-injected-script-host.h",
+        "v8-inspector-impl.cc",
+        "v8-inspector-impl.h",
+        "v8-inspector-session-impl.cc",
+        "v8-inspector-session-impl.h",
+        "v8-internal-value-type.cc",
+        "v8-internal-value-type.h",
+        "v8-profiler-agent-impl.cc",
+        "v8-profiler-agent-impl.h",
+        "v8-regex.cc",
+        "v8-regex.h",
+        "v8-runtime-agent-impl.cc",
+        "v8-runtime-agent-impl.h",
+        "v8-schema-agent-impl.cc",
+        "v8-schema-agent-impl.h",
+        "v8-stack-trace-impl.cc",
+        "v8-stack-trace-impl.h",
+        "v8-value-utils.cc",
+        "v8-value-utils.h",
+        "wasm-translation.cc",
+        "wasm-translation.h",
+        ":inspector_injected_script",
+        ":protocol_generated_sources",
+    ],
+    copts = [
+        "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
+    ],
+    includes = [
+        "gen",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:src_inspector_private_headers",
+        "//:v8_libbase",
+    ],
+)

@@ -174,9 +174,13 @@ def to_file_name(config, file_name):
 
 
 def initialize_jinja_env(jinja_dir, cache_dir, config):
-    # pylint: disable=F0401
-    sys.path.insert(1, os.path.abspath(jinja_dir))
-    import jinja2
+    try:
+        # We don't need to modify |sys.path| if we build with bazel.
+        import jinja2
+    except ImportError:
+      # pylint: disable=F0401
+      sys.path.insert(1, os.path.abspath(jinja_dir))
+      import jinja2
 
     jinja_env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(module_path),

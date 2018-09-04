@@ -2,7 +2,9 @@
 ## Use of this source code is governed by a BSD-style license that can be
 ## found in the LICENSE file.
 
-# TODO(yannic): Having one test target for every file should decrease test time.
+licenses(["notice"])  # BSD 3-Clause
+
+# TODO(yannic): Splitting this huge test target should decrease test time.
 cc_test(
     name = "unittests",
     srcs = [
