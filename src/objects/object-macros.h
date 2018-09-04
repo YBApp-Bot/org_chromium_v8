@@ -14,7 +14,7 @@
 // for fields that can be written to and read from multiple threads at the same
 // time. See comments in src/base/atomicops.h for the memory ordering sematics.
 
-#include <src/v8memory.h>
+#include "src/v8memory.h"
 
 #define DECL_PRIMITIVE_ACCESSORS(name, type) \
   inline type name() const;                  \

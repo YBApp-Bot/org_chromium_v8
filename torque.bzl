@@ -12,13 +12,16 @@ def _dirname(file):
 
 
 def _torque_impl(ctx):
-    outputs = [ctx.actions.declare_file("builtin-definitions-from-dsl.h")]
+    outputs = [
+        ctx.actions.declare_file(
+            "torque-generated/builtin-definitions-from-dsl.h"),
+    ]
     for module in ctx.attr.modules:
         outputs += [
             ctx.actions.declare_file(
-                "builtins-{}-from-dsl-gen.cc".format(module)),
+                "torque-generated/builtins-{}-from-dsl-gen.cc".format(module)),
             ctx.actions.declare_file(
-                "builtins-{}-from-dsl-gen.h".format(module)),
+                "torque-generated/builtins-{}-from-dsl-gen.h".format(module)),
         ]
 
     args = ["-o", _dirname(outputs[0].path)] + [f.path for f in ctx.files.srcs]
