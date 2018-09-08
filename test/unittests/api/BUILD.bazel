@@ -1,0 +1,36 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+licenses(["notice"])  # BSD 3-Clause
+
+load("//:defines.bzl", "DEFINES")
+
+cc_test(
+    name = "api",
+    timeout = "long",
+    srcs = [
+        "access-check-unittest.cc",
+        "exception-unittest.cc",
+        "interceptor-unittest.cc",
+        "isolate-unittest.cc",
+        "remote-object-unittest.cc",
+        "v8-object-unittest.cc",
+    ],
+    copts = [
+        "-Iexternal/gtest/include",
+        "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
+    ],
+    defines = DEFINES,
+    shard_count = 10,
+    deps = [
+        "//:v8_for_testing",
+        "//:v8_libbase",
+        "//:v8_libplatform",
+        "//test/unittests:test_utils",
+        "//testing:gmock-support",
+        "//testing:gtest-support",
+        "//testing/gtest/include/gtest",
+    ],
+)

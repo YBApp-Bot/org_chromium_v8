@@ -1,0 +1,29 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+licenses(["notice"])  # BSD 3-Clause
+
+load("//:defines.bzl", "DEFINES")
+
+cc_test(
+    name = "compiler-dispatcher",
+    srcs = [
+        "compiler-dispatcher-tracer-unittest.cc",
+        "compiler-dispatcher-unittest.cc",
+        "optimizing-compile-dispatcher-unittest.cc",
+        "unoptimized-compile-job-unittest.cc",
+    ],
+    copts = [
+        "-Iexternal/gtest/include",
+        "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
+    ],
+    defines = DEFINES,
+    deps = [
+        "//:v8_for_testing",
+        "//test/unittests:test_utils",
+        "//testing:gtest-support",
+        "//testing/gtest/include/gtest",
+    ],
+)

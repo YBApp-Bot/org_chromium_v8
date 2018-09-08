@@ -1,0 +1,48 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+licenses(["notice"])  # BSD 3-Clause
+
+load("//:defines.bzl", "DEFINES")
+
+cc_test(
+    name = "base",
+    srcs = [
+        "atomic-utils-unittest.cc",
+        "bits-unittest.cc",
+        "cpu-unittest.cc",
+        "division-by-constant-unittest.cc",
+        "flags-unittest.cc",
+        "functional-unittest.cc",
+        "ieee754-unittest.cc",
+        "iterator-unittest.cc",
+        "list-unittest.cc",
+        "logging-unittest.cc",
+        "macros-unittest.cc",
+        "ostreams-unittest.cc",
+        "platform/condition-variable-unittest.cc",
+        "platform/mutex-unittest.cc",
+        "platform/platform-unittest.cc",
+        "platform/semaphore-unittest.cc",
+        "platform/time-unittest.cc",
+        "region-allocator-unittest.cc",
+        "sys-info-unittest.cc",
+        "template-utils-unittest.cc",
+        "utils/random-number-generator-unittest.cc",
+    ],
+    copts = [
+        "-Iexternal/gtest/include",
+        "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
+    ],
+    defines = DEFINES,
+    deps = [
+        "//:v8_libbase",
+        "//:v8_libplatform",
+        "//test/unittests:test_utils",
+        "//testing:gmock-support",
+        "//testing:gtest-support",
+        "//testing/gtest/include/gtest",
+    ],
+)

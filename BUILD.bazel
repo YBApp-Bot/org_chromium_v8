@@ -4,49 +4,13 @@
 
 licenses(["notice"])  # BSD 3-Clause
 
+load("//:defines.bzl", "DEFINES")
 load("//:torque.bzl", "torque", "torque_core", "torque_initializers")
 
 config_setting(
     name = "enable_i18n_support",
     values = {"define": "v8_enable_i18n_support=true"},
 )
-
-defines = [
-    "V8_DEPRECATION_WARNINGS",
-    "NO_TCMALLOC",
-    "FULL_SAFE_BROWSING",
-    "SAFE_BROWSING_CSD",
-    "SAFE_BROWSING_DB_LOCAL",
-    "CHROMIUM_BUILD",
-    "FIELDTRIAL_TESTING_ENABLED",
-    "_LIBCPP_HAS_NO_ALIGNED_ALLOCATION",
-    "CR_XCODE_VERSION=0900",
-    "CR_CLANG_REVISION=\"340925-1\"",
-    "__STDC_CONSTANT_MACROS",
-    "__STDC_FORMAT_MACROS",
-    "__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORE=0",
-    "_DEBUG",
-    "DYNAMIC_ANNOTATIONS_ENABLED=1",
-    "WTF_USE_DYNAMIC_ANNOTATIONS=1",
-    "ENABLE_DISASSEMBLER",
-    "V8_TYPED_ARRAY_MAX_SIZE_IN_HEAP=64",
-    "ENABLE_GDB_JIT_INTERFACE",
-    "ENABLE_MINOR_MC",
-    "OBJECT_PRINT",
-    "VERIFY_HEAP",
-    "V8_TRACE_MAPS",
-    "V8_ENABLE_ALLOCATION_TIMEOUT",
-    "V8_ENABLE_FORCE_SLOW_PATH",
-    "V8_ENABLE_CHECKS",
-    "V8_DEPRECATION_WARNINGS",
-    "V8_IMMINENT_DEPRECATION_WARNINGS",
-    "ENABLE_HANDLE_ZAPPING",
-    "V8_CONCURRENT_MARKING",
-    "V8_CHECK_MICROTASKS_SCOPES_CONSISTENCY",
-    "V8_EMBEDDED_BUILTINS",
-    "V8_EMBEDDED_BYTECODE_HANDLERS",
-    "V8_TARGET_ARCH_X64",
-]
 
 ################################################################################
 ##                                                                            ##
@@ -98,7 +62,7 @@ torque_initializers(
 
 cc_library(
     name = "v8_maybe_snapshot",
-    defines = defines,
+    defines = DEFINES,
     deps = [
         ":v8_init",
         ":v8_nosnapshot",
@@ -116,7 +80,7 @@ cc_library(
         "extras-libraries.cc",
         "libraries.cc",
     ],
-    defines = defines,
+    defines = DEFINES,
     deps = [
         ":v8_base",
     ],
@@ -201,7 +165,7 @@ cc_library(
         #
         "src/builtins/x64/builtins-x64.cc",
     ],
-    defines = defines,
+    defines = DEFINES,
     deps = [
         ":v8_base",
     ],
@@ -1341,7 +1305,7 @@ cc_library(
         "src/x64/simulator-x64.h",
         "src/x64/sse-instr.h",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         ":v8_libbase",
@@ -1388,7 +1352,7 @@ cc_library(
         "src/torque/utils.cc",
         "src/torque/utils.h",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         ":v8_libbase",
@@ -1485,7 +1449,7 @@ cc_library(
         "src/base/debug/stack_trace_posix.cc",
         "src/base/platform/platform-macos.cc",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         "//testing/gtest/include/gtest:gtest_prod",
@@ -1520,7 +1484,7 @@ cc_library(
         "src/vector.h",
         "src/wasm/wasm-feature-flags.h",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         "//src/third_party/utf8-decoder",
@@ -1557,7 +1521,7 @@ cc_library(
         "-Iinclude",
         "-Iexternal/org_chromium_v8/include",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         ":v8_libbase",
@@ -1575,7 +1539,7 @@ cc_library(
         "src/libsampler/sampler.cc",
         "src/libsampler/sampler.h",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         ":v8_libbase",
@@ -1595,7 +1559,7 @@ cc_binary(
     srcs = [
         "src/torque/torque.cc",
     ],
-    defines = defines,
+    defines = DEFINES,
     deps = [
         ":torque_base",
     ],
@@ -1613,7 +1577,7 @@ cc_library(
     srcs = [
         "src/v8dll-main.cc",
     ],
-    defines = defines,
+    defines = DEFINES,
     visibility = ["//visibility:public"],
     deps = [
         ":torque_base",

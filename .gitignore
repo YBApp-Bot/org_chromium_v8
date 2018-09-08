@@ -105,8 +105,4 @@ node_modules
 tools/turbolizer/build
 tools/turbolizer/.rpt2_cache
 tools/turbolizer/deploy
-/bazel-bin
-/bazel-genfiles
-/bazel-out
-/bazel-testlogs
-/bazel-v8
+/bazel-*

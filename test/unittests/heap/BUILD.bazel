@@ -1,0 +1,46 @@
+## Copyright 2018 The Chromium Authors. All rights reserved.
+## Use of this source code is governed by a BSD-style license that can be
+## found in the LICENSE file.
+
+licenses(["notice"])  # BSD 3-Clause
+
+load("//:defines.bzl", "DEFINES")
+
+cc_test(
+    name = "heap",
+    timeout = "long",
+    srcs = [
+        "barrier-unittest.cc",
+        "bitmap-unittest.cc",
+        "embedder-tracing-unittest.cc",
+        "gc-idle-time-handler-unittest.cc",
+        "gc-tracer-unittest.cc",
+        "heap-controller-unittest.cc",
+        "heap-unittest.cc",
+        "item-parallel-job-unittest.cc",
+        "marking-unittest.cc",
+        "memory-reducer-unittest.cc",
+        "object-stats-unittest.cc",
+        "scavenge-job-unittest.cc",
+        "slot-set-unittest.cc",
+        "spaces-unittest.cc",
+        "unmapper-unittest.cc",
+        "worklist-unittest.cc",
+    ],
+    copts = [
+        "-Iexternal/gtest/include",
+        "-Iinclude",
+        "-Iexternal/org_chromium_v8/include",
+    ],
+    defines = DEFINES,
+    shard_count = 10,
+    deps = [
+        "//:v8_for_testing",
+        "//:v8_libbase",
+        "//:v8_libplatform",
+        "//test/unittests:test_utils",
+        "//testing:gmock-support",
+        "//testing:gtest-support",
+        "//testing/gtest/include/gtest",
+    ],
+)
